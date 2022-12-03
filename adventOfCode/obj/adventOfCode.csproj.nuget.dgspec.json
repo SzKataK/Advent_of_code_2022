@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\KATA\\TANULMÁNYOK\\Informatika\\University_projects\\Advent_of_code_2022\\adventOfCode\\adventOfCode.csproj": {}
+    "C:\\KATA\\LEARNING\\Informatika\\University_projects\\Advent_of_code_2022\\adventOfCode\\adventOfCode.csproj": {}
   },
   "projects": {
-    "C:\\KATA\\TANULMÁNYOK\\Informatika\\University_projects\\Advent_of_code_2022\\adventOfCode\\adventOfCode.csproj": {
+    "C:\\KATA\\LEARNING\\Informatika\\University_projects\\Advent_of_code_2022\\adventOfCode\\adventOfCode.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\KATA\\TANULMÁNYOK\\Informatika\\University_projects\\Advent_of_code_2022\\adventOfCode\\adventOfCode.csproj",
+        "projectUniqueName": "C:\\KATA\\LEARNING\\Informatika\\University_projects\\Advent_of_code_2022\\adventOfCode\\adventOfCode.csproj",
         "projectName": "adventOfCode",
-        "projectPath": "C:\\KATA\\TANULMÁNYOK\\Informatika\\University_projects\\Advent_of_code_2022\\adventOfCode\\adventOfCode.csproj",
+        "projectPath": "C:\\KATA\\LEARNING\\Informatika\\University_projects\\Advent_of_code_2022\\adventOfCode\\adventOfCode.csproj",
         "packagesPath": "C:\\Users\\Sz. Kata\\.nuget\\packages\\",
-        "outputPath": "C:\\KATA\\TANULMÁNYOK\\Informatika\\University_projects\\Advent_of_code_2022\\adventOfCode\\obj\\",
+        "outputPath": "C:\\KATA\\LEARNING\\Informatika\\University_projects\\Advent_of_code_2022\\adventOfCode\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

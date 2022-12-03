@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 
 namespace adventOfCode
 {
@@ -199,26 +200,121 @@ namespace adventOfCode
 
     class Day3
     {
+        // For both
+        public int Value(char letter)
+        {
+            int ascii = letter;
+            if (ascii >= 95 && ascii <= 122)
+            {
+                return ascii - 96;
+            }
+            else if (ascii >= 65 && ascii <= 90)
+            {
+                return ascii - 38;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        // Task 1
+        public int SharedItem(string line)
+        {
+            int half = line.Length / 2;
+            string comp1 = line.Substring(0, half);
+            string comp2 = line.Substring(half);
+
+            int i = 0;
+            bool not = true;
+            while (i < half && not)
+            {
+                if (comp2.Contains(comp1[i])) not = false;
+                else i++;
+            }
+
+            return Value(comp1[i]);
+        }
+
+        // Task 2
+        public int Badge(string one, string two, string three)
+        {
+            int i = 0;
+            bool not = true;
+            while (i < one.Length && not)
+            {
+                if (two.Contains(one[i]) && three.Contains(one[i])) not = false;
+                else i++;
+            }
+            return Value(one[i]);
+        }
 
         public void Solution()
         {
+            int sumforTask1 = 0;
 
+            int sumforTask2 = 0;
+            int c = 0;
+            string[] teams = new string[3];
 
+            using (StreamReader sr = new StreamReader("data3.txt"))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
 
+                    // Task 1
+                    sumforTask1 += SharedItem(line);
 
+                    // Task 1
+                    if (c < 2)
+                    {
+                        teams[c] = line;
+                        c++;
+                    }
+                    else
+                    {
+                        teams[c] = line;
+                        sumforTask2 += Badge(teams[0], teams[1], teams[2]);
+                        c = 0;
+                    }
+                }
+            }
 
+            Console.WriteLine("Task 1: {0}", sumforTask1);
+            Console.WriteLine("Task 2: {0}", sumforTask2);
         }
-
-
     }
 
+    class Day4
+    {
+        
+        
+        
+        
+        public void Solution()
+        {
+            
+
+            using (StreamReader sr = new StreamReader("data4.txt"))
+            {
+                while (!sr.EndOfStream)
+                {
+                    
+                }
+            }
+
+            
+        }
+    }
 
     internal class Program
     {
         static void Main(string[] args)
         {
-            Day2 d = new Day2();
+            Day4 d = new Day4();
             d.Solution();
+
 
         }
     }
