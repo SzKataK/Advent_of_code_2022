@@ -204,19 +204,29 @@ namespace adventOfCode
         public int Value(char letter)
         {
             int ascii = letter;
-            if (ascii >= 95 && ascii <= 122)
+            if (ascii >= 97 && ascii <= 122) return ascii - 96;
+            else if (ascii >= 65 && ascii <= 90) return ascii - 38;
+            else return 0;
+        }
+
+        // It also works
+        /*
+        public int Value1(char letter)
+        {
+            if (letter >= 'a' && letter <= 'z')
             {
-                return ascii - 96;
+                return letter - 'a' + 1;
             }
-            else if (ascii >= 65 && ascii <= 90)
+            else if (letter >= 'A' && letter <= 'Z')
             {
-                return ascii - 38;
+                return letter - 'A' + 27;
             }
             else
             {
                 return 0;
             }
         }
+        */
 
         // Task 1
         public int SharedItem(string line)
@@ -288,23 +298,75 @@ namespace adventOfCode
 
     class Day4
     {
-        
-        
-        
-        
         public void Solution()
         {
-            
+            int sumforTask1 = 0;
+            int sumforTask2 = 0;
 
             using (StreamReader sr = new StreamReader("data4.txt"))
             {
                 while (!sr.EndOfStream)
                 {
-                    
+                    string line = sr.ReadLine();
+                    string[] h = line.Split(",");
+
+                    int[] ranges = new int[4];
+                    ranges[0] = Convert.ToInt32(h[0].Split("-")[0]);
+                    ranges[1] = Convert.ToInt32(h[0].Split("-")[1]);
+                    ranges[2] = Convert.ToInt32(h[1].Split("-")[0]);
+                    ranges[3] = Convert.ToInt32(h[1].Split("-")[1]);
+
+                    if (ranges[0] < ranges[2])
+                    {
+                        if (ranges[1] >= ranges[3])
+                        {
+                            sumforTask1++;
+                            sumforTask2++;
+                        }
+                        else if (ranges[1] >= ranges[2] && ranges[1] <= ranges[3])
+                        {
+                            sumforTask2++;
+                        }
+
+                    }
+                    else if (ranges[0] == ranges[2])
+                    {
+                        sumforTask1++;
+                        sumforTask2++;
+                    }
+                    else
+                    {
+                        if (ranges[1] <= ranges[3])
+                        {
+                            sumforTask1++;
+                            sumforTask2++;
+                        }
+                        else if (ranges[3] >= ranges[0] && ranges[3] <= ranges[1])
+                        {
+                            sumforTask2++;
+                        }
+                    }
                 }
             }
 
-            
+            Console.WriteLine("Task 1: {0}", sumforTask1);
+            Console.WriteLine("Task 2: {0}", sumforTask2);
+        }
+    }
+
+    class Day5
+    {
+        public void Solution()
+        {
+            /*
+            using (StreamReader sr = new StreamReader("data5.txt"))
+            {
+                while (!sr.EndOfStream)
+                {
+
+                }
+            }
+            */
         }
     }
 
