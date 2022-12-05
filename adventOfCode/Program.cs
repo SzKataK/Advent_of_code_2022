@@ -271,7 +271,7 @@ namespace adventOfCode
             {
                 while (!sr.EndOfStream)
                 {
-                    string line = sr.ReadLine();
+                    string? line = sr.ReadLine();
 
                     // Task 1
                     sumforTask1 += SharedItem(line);
@@ -307,7 +307,7 @@ namespace adventOfCode
             {
                 while (!sr.EndOfStream)
                 {
-                    string line = sr.ReadLine();
+                    string? line = sr.ReadLine();
                     string[] h = line.Split(",");
 
                     int[] ranges = new int[4];
@@ -358,15 +358,122 @@ namespace adventOfCode
     {
         public void Solution()
         {
-            /*
+            // Number of stacks and the biggest stack
+            int stacks = 9;
+            int biggest = 8;
+
+            List<List<string>> Crates1 = new List<List<string>>();
+            List<List<string>> Crates2 = new List<List<string>>();
+            for (int i = 0; i < stacks; i++)
+            {
+                List<string> Newelement1 = new List<string>();
+                List<string> Newelement2 = new List<string>();
+                Crates1.Add(Newelement1);
+                Crates2.Add(Newelement2);
+            }
+
+            using (StreamReader sr = new StreamReader("data5.txt"))
+            {
+                int c = 0;
+                while (!sr.EndOfStream)
+                {
+                    string? line = sr.ReadLine();
+
+                    if (c < biggest)
+                    {
+                        // For both
+                        string betterLine = "";
+                        for (int i = 0; i < line?.Length; i++)
+                        {
+                            int a = i % 4;
+                            if (a == 3) betterLine += ";";
+                            else betterLine += line[i];
+                        }
+
+                        string[] h = betterLine.Split(';');
+                        for (int i = 0; i < h.Length; i++)
+                        {
+                            if (h[i] != "   ")
+                            {
+                                Crates1[i].Add(h[i]);
+                                Crates2[i].Add(h[i]);
+                            }
+                        }
+                    }
+                    else if (c >= biggest + 2)
+                    {
+                        // For both
+                        string[] h = line.Split(" ");
+
+                        int amount = Convert.ToInt32(h[1]);
+                        int from = Convert.ToInt32(h[3]) - 1;
+                        int to = Convert.ToInt32(h[5]) - 1;
+
+                        // Task 1
+                        for (int i = 0; i < amount; i++)
+                        {
+                            Crates1[to].Insert(0, Crates1[from][0]);
+                            Crates1[from].RemoveAt(0);
+                        }
+
+                        // Task 2
+                        List<string> Repos = new List<string>();
+                        for (int i = 0; i < amount; i++)
+                        {
+                            Repos.Add(Crates2[from][0]);
+                            Crates2[from].RemoveAt(0);
+                        }
+                        Crates2[to].InsertRange(0, Repos);
+
+                    }
+
+                    c++;
+                }
+            }
+
+            string answerOfTask1 = "";
+            string answerOfTask2 = "";
+            for (int i = 0; i < stacks; i++)
+            {
+                answerOfTask1 += Crates1[i][0][1];
+                answerOfTask2 += Crates2[i][0][1];
+            }
+            Console.WriteLine("Task 1: {0}", answerOfTask1);
+            Console.WriteLine("Task 2: {0}", answerOfTask2);
+        }
+
+        /*
+         Console.WriteLine("\nWhole:");
+            foreach (List<string> i in Crates1)
+            {
+                foreach (string l in i)
+                {
+                    Console.WriteLine(l);
+                }
+                Console.WriteLine("-[new list]-");
+            }
+        */
+
+    }
+
+    class Day6
+    {
+
+        public void Solution()
+        {
             using (StreamReader sr = new StreamReader("data5.txt"))
             {
                 while (!sr.EndOfStream)
                 {
 
                 }
+
+
             }
-            */
+
+
+
+
         }
     }
 
@@ -374,10 +481,11 @@ namespace adventOfCode
     {
         static void Main(string[] args)
         {
-            Day4 d = new Day4();
+            Day5 d = new Day5();
             d.Solution();
 
 
         }
     }
 }
+    
