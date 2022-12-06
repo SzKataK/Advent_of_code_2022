@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Net.Security;
 
 namespace adventOfCode
 {
@@ -424,7 +425,6 @@ namespace adventOfCode
                             Crates2[from].RemoveAt(0);
                         }
                         Crates2[to].InsertRange(0, Repos);
-
                     }
 
                     c++;
@@ -458,22 +458,87 @@ namespace adventOfCode
 
     class Day6
     {
+        public bool Marker(List<char> List)
+        {
+            int i = 0;
+            bool marker = true;
+
+            while (i < List.Count && marker)
+            {
+                char tmp = List[i];
+                List.RemoveAt(i);
+
+                if (List.Contains(tmp))
+                {
+                    marker = false;
+                }
+
+                List.Insert(i, tmp);
+                i++;
+            }
+
+            return marker;
+        }
+        
+        public int Find(List<char> InputLine, int lim)
+        {
+            int c = 0;
+            bool notyet = true;
+            List<char> Letters = new List<char>();
+
+            while (notyet && c < InputLine.Count)
+            {
+                char input = InputLine[c];
+                if (Letters.Count <= lim-1)
+                {
+                    Letters.Add(input);
+                    c++;
+                }
+                else if (Letters.Count == lim)
+                {
+                    if (Marker(Letters))
+                    {
+                        notyet = false;
+                    }
+                    else
+                    {
+                        Letters.Add(input);
+                        Letters.RemoveAt(0);
+                        c++;
+                    }
+                }
+            }
+
+            return c;
+        }
 
         public void Solution()
         {
-            using (StreamReader sr = new StreamReader("data5.txt"))
+            List<char> InputLine = new List<char>();
+            using (StreamReader sr = new StreamReader("data6.txt"))
             {
                 while (!sr.EndOfStream)
                 {
-
+                    InputLine.Add(Convert.ToChar(sr.Read()));
                 }
+            }
+            
+            // Task 1: start-of-packet marker            
+            Console.WriteLine("Task 1: {0}", Find(InputLine, 4));
 
+            // Task 2: start-of-massege marker
+            Console.WriteLine("Task 2: {0}", Find(InputLine, 14));
+        }
+    }
+
+    class Day7
+    {
+        public void Solution()
+        {
+            using (StreamReader sr = new StreamReader(""))
+            {
 
             }
-
-
-
-
         }
     }
 
@@ -481,11 +546,10 @@ namespace adventOfCode
     {
         static void Main(string[] args)
         {
-            Day5 d = new Day5();
+            Day6 d = new Day6();
             d.Solution();
 
 
         }
     }
 }
-    
